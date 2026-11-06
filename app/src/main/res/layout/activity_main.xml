@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Operation screen: mode, status, two operational cards, three context rows, and
+    Preview + Start/Stop pinned at the bottom. Styles are TimerPlus'. It fits a standard phone
+    without scrolling; the ScrollView stays for small screens and large fonts.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        style="@style/AppToolbar"
+        android:title="@string/app_name" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/screen_margin"
+            android:paddingBottom="@dimen/space_m">
+
+            <!-- Photo | Video: the operating mode; disabled during a session. -->
+            <LinearLayout
+                android:id="@+id/mode_chips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_segment_group"
+                android:clipToOutline="true"
+                android:orientation="horizontal" />
+
+            <!-- Status -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_m"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:id="@+id/status_dot"
+                    android:layout_width="@dimen/status_dot_size"
+                    android:layout_height="@dimen/status_dot_size"
+                    android:layout_marginEnd="@dimen/space_s"
+                    android:background="@drawable/dot" />
+
+                <TextView
+                    android:id="@+id/status_title"
+                    style="@style/TextHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Stop reason, or skipped/failed during a session; only when there is one. -->
+            <TextView
+                android:id="@+id/status_detail"
+                style="@style/TextBodySecondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_xs"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/warning"
+                style="@style/TextBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_s"
+                android:background="@drawable/bg_card"
+                android:drawableStart="@drawable/ic_warning"
+                android:drawablePadding="@dimen/space_s"
+                android:drawableTint="@color/status_busy"
+                android:gravity="center_vertical"
+                android:padding="@dimen/space_m"
+                android:visibility="gone" />
+
+            <!-- Session progress: two operational cards, the same height. -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_m"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    style="@style/StatCard"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/space_s">
+
+                    <TextView
+                        android:id="@+id/card1_label"
+                        style="@style/StatLabel" />
+
+                    <TextView
+                        android:id="@+id/card1_value"
+                        style="@style/StatValue" />
+
+                    <TextView
+                        android:id="@+id/card1_note"
+                        style="@style/StatNote" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/StatCard"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/card2_label"
+                        style="@style/StatLabel" />
+
+                    <TextView
+                        android:id="@+id/card2_value"
+                        style="@style/StatValue" />
+
+                    <TextView
+                        android:id="@+id/card2_note"
+                        style="@style/StatNote" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Context: camera, resolution, free storage (item_about_row look). -->
+            <LinearLayout
+                style="@style/AboutCard"
+                android:layout_marginTop="@dimen/space_m">
+
+                <LinearLayout style="@style/ContextRow">
+
+                    <TextView
+                        style="@style/ContextLabel"
+                        android:text="@string/label_camera" />
+
+                    <TextView
+                        android:id="@+id/context_camera"
+                        style="@style/ContextValue" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/ContextRow">
+
+                    <TextView
+                        style="@style/ContextLabel"
+                        android:text="@string/label_resolution" />
+
+                    <TextView
+                        android:id="@+id/context_resolution"
+                        style="@style/ContextValue" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/ContextRow">
+
+                    <TextView
+                        style="@style/ContextLabel"
+                        android:text="@string/context_free" />
+
+                    <TextView
+                        android:id="@+id/context_free"
+                        style="@style/ContextValue" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Actions -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/screen_margin"
+        android:paddingTop="@dimen/space_s"
+        android:paddingBottom="@dimen/space_m">
+
+        <Button
+            android:id="@+id/open_app_settings"
+            style="@style/ButtonSecondary"
+            android:layout_marginBottom="@dimen/space_s"
+            android:text="@string/action_open_settings"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Disabled, not hidden, during a session: the buttons never move. -->
+            <ar.sanzol.sentrycam.CenteredIconButton
+                android:id="@+id/preview_button"
+                style="@style/ButtonSecondary"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/space_s"
+                android:drawableStart="@drawable/ic_preview"
+                android:text="@string/action_preview" />
+
+            <!-- Same primary style in both states, as TimerPlus Start/Stop; the state is in the status line. -->
+            <ar.sanzol.sentrycam.CenteredIconButton
+                android:id="@+id/start_stop"
+                style="@style/ButtonPrimary"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/ic_play"
+                android:text="@string/action_start" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

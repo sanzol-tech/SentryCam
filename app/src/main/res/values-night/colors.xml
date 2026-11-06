@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="surface">#FF141417</color>
+    <color name="ink">#FFECEBE6</color>
+    <color name="ink_secondary">#FFA3A099</color>
+    <color name="ink_hint">#FF7C7A74</color>
+    <color name="line">#FF32323A</color>
+    <color name="on_ink">#FF141417</color>
+    <color name="ripple">#33FFFFFF</color>
+
+    <color name="accent">#FF00E87A</color>
+    <color name="tab_pill_fill">#2E00E87A</color>
+    <color name="danger">#FFF28B82</color>
+
+    <color name="status_busy">#FFFDD663</color>
+</resources>

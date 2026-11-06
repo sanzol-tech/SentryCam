@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- One chip of a TimerPlus segmented control (mode selector, lens chips); filled from code. -->
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/SegmentChip"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:textAllCaps="false" />

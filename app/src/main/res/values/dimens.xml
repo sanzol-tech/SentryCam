@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TimerPlus spacing scale, type scale and common geometry, copied verbatim (the subset SentryCam uses). -->
+    <dimen name="space_xs">4dp</dimen>
+    <dimen name="space_s">8dp</dimen>
+    <dimen name="space_m">16dp</dimen>
+    <dimen name="space_l">24dp</dimen>
+    <dimen name="space_xl">32dp</dimen>
+
+    <dimen name="text_meta">12sp</dimen>
+    <dimen name="text_body">14sp</dimen>
+    <dimen name="text_title">16sp</dimen>
+    <dimen name="text_heading">20sp</dimen>
+
+    <dimen name="screen_margin">16dp</dimen>
+    <dimen name="content_padding">24dp</dimen>
+    <dimen name="touch_min">48dp</dimen>
+    <dimen name="divider_thickness">1dp</dimen>
+    <dimen name="stroke_thin">1dp</dimen>
+    <dimen name="stroke_focus">2dp</dimen>
+    <dimen name="field_padding_vertical">10dp</dimen>
+    <dimen name="radius_button">10dp</dimen>
+    <dimen name="toolbar_height">56dp</dimen>
+
+    <!-- As TimerPlus dimens_timer. -->
+    <dimen name="about_icon_size">56dp</dimen>
+    <dimen name="about_row_min_height">40dp</dimen>
+
+    <!-- SentryCam -->
+    <dimen name="status_dot_size">12dp</dimen>
+</resources>

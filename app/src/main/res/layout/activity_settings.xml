@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Settings and theme. TimerPlus styles: FieldLabel over an underlined FieldInput, outlined
+    cards. One screen for both modes: the groups of the mode chosen on the main
+    screen are shown (photo_* or video_*); camera, duration limit, storage and theme are shared
+    widgets, filled with the current mode's values.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ScreenToolbar"
+        android:title="@string/title_settings" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/content_padding"
+            android:paddingBottom="@dimen/space_l">
+
+            <TextView
+                android:id="@+id/settings_locked"
+                style="@style/TextBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_s"
+                android:background="@drawable/bg_card"
+                android:padding="@dimen/space_m"
+                android:text="@string/settings_locked"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/mode_note"
+                style="@style/TextMeta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_s" />
+
+            <!-- Capture (Photo) or Recording (Video) -->
+            <TextView
+                android:id="@+id/section_capture_title"
+                style="@style/SectionTitle"
+                android:layout_marginTop="@dimen/space_m"
+                android:text="@string/section_capture" />
+
+            <LinearLayout
+                android:id="@+id/photo_interval_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/FieldLabel"
+                    android:text="@string/label_interval" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/interval_value"
+                        style="@style/FieldInput"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/space_m"
+                        android:hint="@string/hint_value"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:minHeight="@dimen/touch_min" />
+
+                    <Spinner
+                        android:id="@+id/interval_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="140dp"
+                        android:minHeight="@dimen/touch_min" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                style="@style/FieldLabel"
+                android:text="@string/label_camera" />
+
+            <RadioGroup
+                android:id="@+id/camera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/camera_back"
+                    style="@style/ChoiceItem"
+                    android:text="@string/camera_back" />
+
+                <RadioButton
+                    android:id="@+id/camera_front"
+                    style="@style/ChoiceItem"
+                    android:text="@string/camera_front" />
+            </RadioGroup>
+
+            <TextView
+                style="@style/FieldLabel"
+                android:text="@string/label_resolution" />
+
+            <Spinner
+                android:id="@+id/resolution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/touch_min" />
+
+            <!-- Which lens the sizes belong to, and a saved size that lens does not offer. -->
+            <TextView
+                android:id="@+id/resolution_note"
+                style="@style/TextMeta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_xs"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/photo_quality_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_l"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/label_quality" />
+
+                    <TextView
+                        android:id="@+id/quality_value"
+                        style="@style/TextTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="monospace" />
+                </LinearLayout>
+
+                <SeekBar
+                    android:id="@+id/quality"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/touch_min"
+                    android:max="100"
+                    android:min="50" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/video_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/FieldLabel"
+                    android:text="@string/label_video_quality" />
+
+                <RadioGroup
+                    android:id="@+id/video_quality"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/video_quality_high"
+                        style="@style/ChoiceItem"
+                        android:text="@string/quality_high" />
+
+                    <RadioButton
+                        android:id="@+id/video_quality_medium"
+                        style="@style/ChoiceItem"
+                        android:text="@string/quality_medium" />
+
+                    <RadioButton
+                        android:id="@+id/video_quality_low"
+                        style="@style/ChoiceItem"
+                        android:text="@string/quality_low" />
+                </RadioGroup>
+
+                <TextView
+                    style="@style/FieldLabel"
+                    android:text="@string/label_file_length" />
+
+                <!-- VideoSettings.SEGMENT_MINUTES; labels ("5 min") set from code. -->
+                <RadioGroup
+                    android:id="@+id/file_length"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/file_length_5"
+                        style="@style/ChoiceItem" />
+
+                    <RadioButton
+                        android:id="@+id/file_length_10"
+                        style="@style/ChoiceItem" />
+
+                    <RadioButton
+                        android:id="@+id/file_length_15"
+                        style="@style/ChoiceItem" />
+                </RadioGroup>
+
+                <TextView
+                    style="@style/TextMeta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/file_length_note" />
+
+                <Switch
+                    android:id="@+id/video_audio"
+                    style="@style/SwitchRow"
+                    android:layout_marginTop="@dimen/space_l"
+                    android:text="@string/label_audio" />
+
+                <TextView
+                    style="@style/TextMeta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/audio_note" />
+
+                <!-- Start -->
+                <TextView
+                    style="@style/SectionTitle"
+                    android:text="@string/section_start" />
+
+                <Switch
+                    android:id="@+id/video_delay"
+                    style="@style/SwitchRow"
+                    android:text="@string/label_delay" />
+
+                <LinearLayout
+                    android:id="@+id/delay_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/delay_value"
+                        style="@style/FieldInput"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/space_m"
+                        android:hint="@string/hint_value"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:minHeight="@dimen/touch_min" />
+
+                    <Spinner
+                        android:id="@+id/delay_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="140dp"
+                        android:minHeight="@dimen/touch_min" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Limits -->
+            <TextView
+                style="@style/SectionTitle"
+                android:text="@string/section_limits" />
+
+            <LinearLayout
+                android:id="@+id/photo_shots_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Switch
+                    android:id="@+id/limit_shots"
+                    style="@style/SwitchRow"
+                    android:text="@string/label_limit_shots" />
+
+                <EditText
+                    android:id="@+id/max_shots"
+                    style="@style/FieldInput"
+                    android:hint="@string/hint_shots"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:maxLength="7"
+                    android:minHeight="@dimen/touch_min" />
+            </LinearLayout>
+
+            <Switch
+                android:id="@+id/limit_duration"
+                style="@style/SwitchRow"
+                android:layout_marginTop="@dimen/space_m"
+                android:text="@string/label_limit_duration" />
+
+            <LinearLayout
+                android:id="@+id/duration_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/duration_value"
+                    style="@style/FieldInput"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="@dimen/space_m"
+                    android:hint="@string/hint_value"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:minHeight="@dimen/touch_min" />
+
+                <Spinner
+                    android:id="@+id/duration_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="140dp"
+                    android:minHeight="@dimen/touch_min" />
+            </LinearLayout>
+
+            <!-- Storage -->
+            <TextView
+                style="@style/SectionTitle"
+                android:text="@string/section_storage" />
+
+            <TextView
+                style="@style/FieldLabel"
+                android:text="@string/label_min_free" />
+
+            <EditText
+                android:id="@+id/min_free"
+                style="@style/FieldInput"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="5"
+                android:minHeight="@dimen/touch_min" />
+
+            <TextView
+                android:id="@+id/estimate"
+                style="@style/TextBodySecondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_m"
+                android:background="@drawable/bg_card"
+                android:padding="@dimen/space_m" />
+
+            <!-- Appearance (always editable) -->
+            <TextView
+                style="@style/SectionTitle"
+                android:text="@string/section_appearance" />
+
+            <TextView
+                style="@style/FieldLabel"
+                android:text="@string/label_theme" />
+
+            <RadioGroup
+                android:id="@+id/theme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/theme_system"
+                    style="@style/ChoiceItem"
+                    android:layout_marginEnd="@dimen/space_m"
+                    android:text="@string/theme_system" />
+
+                <RadioButton
+                    android:id="@+id/theme_light"
+                    style="@style/ChoiceItem"
+                    android:layout_marginEnd="@dimen/space_m"
+                    android:text="@string/theme_light" />
+
+                <RadioButton
+                    android:id="@+id/theme_dark"
+                    style="@style/ChoiceItem"
+                    android:text="@string/theme_dark" />
+            </RadioGroup>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

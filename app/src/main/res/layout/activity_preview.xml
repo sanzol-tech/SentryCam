@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Camera Preview: back, title and the Settings gear; the live image as large as
+    the screen allows at the capture's aspect ratio (letterboxed, never cropped); the lens chips
+    only when the phone offers more than one back lens. Nothing else.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ScreenToolbar"
+        android:title="@string/title_preview" />
+
+    <FrameLayout
+        android:id="@+id/preview_box"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- Sized in code to the largest box with the capture's aspect ratio. -->
+        <TextureView
+            android:id="@+id/preview_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <!-- Why there is no image (camera busy, error, permission); hidden while streaming. -->
+        <TextView
+            android:id="@+id/preview_message"
+            style="@style/TextBodySecondary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="@dimen/content_padding"
+            android:visibility="gone" />
+
+        <!-- Shown only when no preview size has the capture's aspect ratio. -->
+        <TextView
+            android:id="@+id/preview_note"
+            style="@style/TextPreviewLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_margin="@dimen/space_s"
+            android:background="@drawable/bg_preview_label"
+            android:paddingHorizontal="@dimen/space_s"
+            android:paddingVertical="@dimen/space_xs"
+            android:text="@string/preview_framing_approximate"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <!-- Back lenses: TimerPlus segmented control, filled from code; hidden for one lens. -->
+    <LinearLayout
+        android:id="@+id/lens_chips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/screen_margin"
+        android:background="@drawable/bg_segment_group"
+        android:clipToOutline="true"
+        android:orientation="horizontal"
+        android:visibility="gone" />
+</LinearLayout>

@@ -1,0 +1,85 @@
+/*
+ * :app:stageRelease builds the signed release, verifies its signature and
+ * stages it with its mapping.txt in release/<versionName>/, two folders above
+ * the project (outside the repository's project folder):
+ *
+ *   release/1.0/sentrycam-1.0.apk
+ *   release/1.0/mapping.txt   (private: needed to read release stack traces)
+ *
+ * Intentionally uses the normal AGP output locations instead of the
+ * Variant Artifact API: simpler, easier to audit, and enough for this app.
+ *
+ * Re-staging a version replaces its folder: while a version is undistributed
+ * its artifacts are disposable. A distributed version is never rebuilt.
+ */
+
+def releaseSigningPropertiesFile = rootProject.file('keystore.properties')
+def releaseRootDir = rootProject.projectDir
+def releaseVersionName = android.defaultConfig.versionName
+def releaseApkDir = layout.buildDirectory.dir('outputs/apk/release')
+def releaseMappingFile = layout.buildDirectory.file('outputs/mapping/release/mapping.txt')
+def releaseStageDir = new File(releaseRootDir, '../../release').canonicalFile
+def releaseBuildTools = androidComponents.sdkComponents.sdkDirectory.map {
+    it.dir("build-tools/${android.buildToolsVersion}").asFile
+}
+
+// Runs an SDK build-tools program (apksigner); fails the build if it fails.
+def runSdkTool = { File dir, String name, List<String> args ->
+    def tool = ["${name}.exe", "${name}.bat", name].collect { new File(dir, it) }.find { it.isFile() }
+    if (tool == null) throw new GradleException("${name} not found in ${dir}")
+    def command = tool.name.endsWith('.bat') ? ['cmd', '/c', tool.path] : [tool.path]
+    def process = new ProcessBuilder(command + args).redirectErrorStream(true).start()
+    process.inputStream.eachLine { println "  [${name}] ${it}" }
+    if (process.waitFor() != 0) throw new GradleException("${name} failed")
+}
+
+// Everything doLast needs is resolved above, at configuration time: Gradle 10 forbids
+// reaching the Project (project.delete, project.copy, ...) while a task runs.
+tasks.register('stageRelease') {
+    group = 'distribution'
+    description = 'Builds, verifies and stages the signed release APK with its mapping.txt.'
+    dependsOn 'assembleRelease'
+
+    doFirst {
+        if (!releaseSigningPropertiesFile.exists()) {
+            throw new GradleException("keystore.properties not found: ${releaseSigningPropertiesFile} (see keystore.properties.example)")
+        }
+        def signing = new Properties()
+        releaseSigningPropertiesFile.withInputStream { signing.load(it) }
+        def keyStoreFile = new File(signing.getProperty('storeFile', '').trim())
+        if (!keyStoreFile.isAbsolute()) keyStoreFile = new File(releaseRootDir, keyStoreFile.path)
+        if (!keyStoreFile.isFile()) {
+            throw new GradleException("Keystore not found: ${keyStoreFile.canonicalPath}")
+        }
+        if (!releaseVersionName) {
+            throw new GradleException('versionName is not set in app/build.gradle')
+        }
+    }
+
+    doLast {
+        def apkDir = releaseApkDir.get().asFile
+        def apks = (apkDir.listFiles() ?: []).findAll {
+            it.isFile() && it.name.endsWith('.apk') && !it.name.contains('unsigned')
+        }
+        if (apks.size() != 1) {
+            throw new GradleException("Expected one signed release APK in ${apkDir}, found ${apks.size()}")
+        }
+        def mappingFile = releaseMappingFile.get().asFile
+        if (!mappingFile.isFile()) {
+            throw new GradleException("mapping.txt not found: ${mappingFile}")
+        }
+
+        runSdkTool(releaseBuildTools.get(), 'apksigner', ['verify', '--verbose', '--print-certs', apks.first().path])
+
+        def releaseOutputDir = new File(releaseStageDir, releaseVersionName)
+        releaseOutputDir.deleteDir()
+        if (!releaseOutputDir.mkdirs()) {
+            throw new GradleException("Cannot create ${releaseOutputDir}")
+        }
+        java.nio.file.Files.copy(apks.first().toPath(),
+                new File(releaseOutputDir, "sentrycam-${releaseVersionName}.apk").toPath())
+        java.nio.file.Files.copy(mappingFile.toPath(), new File(releaseOutputDir, 'mapping.txt').toPath())
+
+        println "SentryCam release staged in: ${releaseOutputDir}"
+    }
+}

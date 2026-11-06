@@ -1,0 +1,79 @@
+plugins {
+    id 'com.android.application'
+}
+
+/*
+ * Release signing. The key and its passwords never live in the repository:
+ * keystore.properties (ignored by git; see keystore.properties.example)
+ * names them. Without that file a release build is still minified but
+ * comes out unsigned, so it cannot be installed.
+ */
+def keystorePropertiesFile = rootProject.file('keystore.properties')
+def keystoreProperties = new Properties()
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withInputStream { keystoreProperties.load(it) }
+    ['storeFile', 'storePassword', 'keyAlias', 'keyPassword'].each { key ->
+        if (!keystoreProperties.getProperty(key)) {
+            throw new GradleException("keystore.properties is missing '${key}' (see keystore.properties.example)")
+        }
+    }
+}
+
+android {
+    namespace = 'ar.sanzol.sentrycam'
+    compileSdk = 37
+
+    // Java only: no Kotlin compile task and no implicit kotlin-stdlib (AGP 9 built-in Kotlin).
+    enableKotlin = false
+
+    defaultConfig {
+        applicationId = "ar.sanzoltech.sentrycam"
+        minSdk = 31
+        targetSdk = 37
+        versionCode = 1
+        versionName = "1.0"
+    }
+
+    signingConfigs {
+        if (keystorePropertiesFile.exists()) {
+            release {
+                storeFile = rootProject.file(keystoreProperties.getProperty('storeFile'))
+                storePassword = keystoreProperties.getProperty('storePassword')
+                keyAlias = keystoreProperties.getProperty('keyAlias')
+                keyPassword = keystoreProperties.getProperty('keyPassword')
+                // v2 only: minSdk 31 makes v1 useless, and v3 adds nothing without key rotation.
+                enableV1Signing = false
+                enableV2Signing = true
+                enableV3Signing = false
+                enableV4Signing = false
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix = '.debug'
+        }
+        release {
+            minifyEnabled = true
+            shrinkResources = true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if (keystorePropertiesFile.exists()) {
+                signingConfig = signingConfigs.release
+            } else {
+                logger.warn('keystore.properties not found: the release APK will be unsigned (see keystore.properties.example).')
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+}
+
+apply from: rootProject.file('release.gradle')

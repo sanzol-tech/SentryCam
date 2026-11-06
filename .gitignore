@@ -1,0 +1,28 @@
+# Signing material never enters the repository.
+keystore.properties
+*.jks
+*.keystore
+*.p12
+*.pfx
+
+# Android / Gradle build outputs.
+.gradle/
+build/
+local.properties
+captures/
+.cxx/
+.externalNativeBuild/
+*.apk
+*.aab
+*.ap_
+*.idsig
+
+# Android Studio / IntelliJ.
+.idea/
+*.iml
+
+# Misc.
+*.log
+*.hprof
+.DS_Store
+Thumbs.db

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Camera Preview: the gear opens the same mode-dependent Settings screen as the main screen. -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_settings"
+        android:iconTint="@color/icon_tint"
+        android:showAsAction="always"
+        android:title="@string/action_settings" />
+</menu>

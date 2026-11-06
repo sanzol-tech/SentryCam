@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- SentryCam-only styles, built on the TimerPlus tokens and text styles. -->
+
+    <!-- One of the two operational cards on the main screen. -->
+    <style name="StatCard">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/bg_card</item>
+        <item name="android:paddingHorizontal">@dimen/space_m</item>
+        <item name="android:paddingVertical">@dimen/space_m</item>
+    </style>
+
+    <style name="StatLabel" parent="TextLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <!-- The number ticks, so monospace (TimerPlus TextHero rule). -->
+    <!--
+        Never cut and never shrunk: the value follows the system font size and, when very large,
+        wraps to a second line (two wide cards leave room for that).
+    -->
+    <style name="StatValue" parent="TextHeading">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/space_xs</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
+    <style name="StatNote" parent="TextMeta">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <!-- A context row on the main screen: label at the start, value at the end (item_about_row). -->
+    <style name="ContextRow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/about_row_min_height</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:baselineAligned">false</item>
+    </style>
+
+    <style name="ContextLabel" parent="TextBodySecondary">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ContextValue" parent="TextBody">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginStart">@dimen/space_m</item>
+        <item name="android:gravity">end</item>
+    </style>
+
+    <!-- A Settings section: Capture, Session limits, Storage, Appearance. -->
+    <style name="SectionTitle" parent="TextTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/space_xl</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- An on/off row in Settings. -->
+    <style name="SwitchRow" parent="TextTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/touch_min</item>
+        <item name="android:layout_marginTop">@dimen/space_s</item>
+    </style>
+
+    <style name="ChoiceItem" parent="TextTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/touch_min</item>
+        <item name="android:layout_marginEnd">@dimen/space_l</item>
+    </style>
+</resources>

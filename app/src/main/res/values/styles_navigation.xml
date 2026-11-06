@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        TimerPlus toolbar and About styles (styles_navigation.xml) on the framework Toolbar:
+        SentryCam has no AndroidX, so the AppCompat attributes become android: ones.
+    -->
+    <style name="AppToolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/toolbar_height</item>
+        <item name="android:background">@color/surface</item>
+        <item name="android:titleTextColor">@color/ink</item>
+    </style>
+
+    <!-- A screen pushed on top of the main one (Settings, About): with the up arrow. -->
+    <style name="ScreenToolbar" parent="AppToolbar">
+        <item name="android:navigationIcon">@drawable/ic_arrow_back</item>
+        <item name="android:navigationContentDescription">@string/action_back</item>
+    </style>
+
+    <!-- A card of facts on the About screen; AboutActivity fills it with item_about_row. -->
+    <style name="AboutCard">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/space_s</item>
+        <item name="android:background">@drawable/bg_card</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingHorizontal">@dimen/space_m</item>
+        <item name="android:paddingVertical">@dimen/space_xs</item>
+    </style>
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Main screen shortcuts: About and Settings, each one tap away by design, so both are
+    always shown rather than "ifRoom".
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="AlwaysShowAction">
+    <item
+        android:id="@+id/action_about"
+        android:icon="@drawable/ic_info"
+        android:iconTint="@color/icon_tint"
+        android:showAsAction="always"
+        android:title="@string/action_about" />
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_settings"
+        android:iconTint="@color/icon_tint"
+        android:showAsAction="always"
+        android:title="@string/action_settings" />
+</menu>

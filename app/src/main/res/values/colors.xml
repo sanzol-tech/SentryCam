@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        TimerPlus semantic color tokens, copied verbatim (light; values-night has the dark
+        variants). SentryCam adds only the status colors below.
+    -->
+    <color name="surface">#FFFFFFFF</color>
+    <color name="ink">#FF17171A</color>
+    <color name="ink_secondary">#FF5F5F5A</color>
+    <color name="ink_hint">#FF8C8C86</color>
+    <color name="line">#FFDCDBD6</color>
+    <color name="on_ink">#FFFFFFFF</color>
+    <color name="ripple">#33000000</color>
+
+    <color name="accent">#FF00803F</color>
+    <color name="tab_pill_fill">#2E00803F</color>
+    <color name="danger">#FFC62828</color>
+    <color name="launcher_background">#FF000000</color>
+
+    <!-- SentryCam: the status dot. Running is the accent, a problem is danger. -->
+    <color name="status_running">@color/accent</color>
+    <color name="status_idle">@color/ink_hint</color>
+    <color name="status_problem">@color/danger</color>
+    <color name="status_busy">#FFB26A00</color>
+
+    <!-- SentryCam: labels over the live camera view (Camera Preview), the same in light and dark. -->
+    <color name="preview_scrim">#99000000</color>
+    <color name="on_preview_scrim">#FFFFFFFF</color>
+</resources>

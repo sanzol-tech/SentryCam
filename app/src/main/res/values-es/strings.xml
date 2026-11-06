@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Status -->
+    <string name="status_running">Capturando</string>
+    <string name="status_starting">Iniciando…</string>
+    <string name="status_recovering">Reconectando la cámara…</string>
+    <string name="status_stopped">Detenida</string>
+    <string name="status_ready">Lista</string>
+    <string name="status_recording">Grabando</string>
+    <string name="status_waiting">Esperando para grabar</string>
+
+    <!-- Stop reasons -->
+    <string name="reason_user">La detuviste vos.</string>
+    <string name="reason_max_shots">Se alcanzó el límite de fotos.</string>
+    <string name="reason_max_duration">Se alcanzó el límite de duración.</string>
+    <string name="reason_low_storage">Poco espacio (%1$s libres). No se borró nada.</string>
+    <string name="reason_permission">Falta el permiso de cámara.</string>
+    <string name="reason_camera_unavailable">Cámara en uso o no disponible.</string>
+    <string name="reason_camera_error">Error de cámara.</string>
+    <string name="reason_storage_error">No se pudieron guardar los archivos.</string>
+    <string name="reason_no_camera">Cámara no disponible en este teléfono.</string>
+    <string name="reason_start_not_allowed">Android no permitió iniciar. Abrí la app y probá de nuevo.</string>
+    <string name="reason_process_ended">Android cerró la app. Iniciá de nuevo para continuar.</string>
+    <string name="reason_low_battery">Batería baja.</string>
+    <string name="reason_too_hot">Teléfono demasiado caliente.</string>
+    <string name="reason_with_detail">%1$s (%2$s)</string>
+
+    <!-- Warnings -->
+    <string name="warning_resolution_fallback">Tamaño guardado no soportado; se usa %1$s.</string>
+    <string name="warning_lens_fallback">Lente guardado no disponible; se usa 1×.</string>
+    <string name="warning_lens_digital_zoom">%1$s× es zoom digital acá; se usa 1×.</string>
+    <string name="warning_video_resolution_fallback">Tamaño de video guardado no soportado; se usa %1$s.</string>
+    <string name="warning_audio_denied">Sin permiso de micrófono: se graba sin audio.</string>
+    <string name="warning_thermal">Teléfono muy caliente; la cámara puede ir más lenta.</string>
+    <string name="warning_recovering">Problema de cámara (%1$s). Reintento %2$d de %3$d…</string>
+
+    <!-- Notification -->
+    <string name="notification_channel">Estado de la captura</string>
+    <string name="notification_title_running">SentryCam está capturando</string>
+    <string name="notification_title_starting">SentryCam está iniciando</string>
+    <string name="notification_title_recovering">SentryCam está reconectando la cámara</string>
+    <string name="notification_title_stopped">SentryCam se detuvo</string>
+    <string name="notification_title_waiting">SentryCam va a empezar a grabar</string>
+    <string name="notification_text_waiting">Empieza a las %1$s</string>
+    <string name="notification_title_recording">SentryCam está grabando</string>
+    <plurals name="notification_text">
+        <item quantity="one">%1$d foto · última a las %2$s</item>
+        <item quantity="many">%1$d fotos · última a las %2$s</item>
+        <item quantity="other">%1$d fotos · última a las %2$s</item>
+    </plurals>
+    <plurals name="notification_text_files">
+        <item quantity="one">%1$d archivo guardado</item>
+        <item quantity="many">%1$d archivos guardados</item>
+        <item quantity="other">%1$d archivos guardados</item>
+    </plurals>
+    <string name="notification_text_none">Todavía no hay fotos</string>
+    <string name="action_stop">Detener</string>
+
+    <!-- Main screen -->
+    <string name="action_start">Iniciar</string>
+    <string name="action_settings">Configuración</string>
+    <string name="action_back">Volver</string>
+    <string name="tile_photos">Fotos</string>
+    <string name="tile_left">Restan</string>
+    <string name="tile_limit">Límite</string>
+    <string name="tile_elapsed">En marcha</string>
+    <string name="tile_photos_left">%1$s fotos</string>
+    <string name="mode_photo">Foto</string>
+    <string name="mode_video">Video</string>
+    <string name="mode_description">Modo %1$s</string>
+    <string name="tile_recorded">Grabado</string>
+    <string name="tile_starts_in">Empieza en</string>
+    <string name="detail_audio_on">con audio</string>
+    <string name="detail_audio_off">sin audio</string>
+    <string name="unlimited">Sin límite</string>
+    <string name="unknown">—</string>
+    <string name="detail_camera_back_factor">Trasera · %1$s×</string>
+    <string name="detail_percent">%1$d %%</string>
+    <string name="card_every">cada %1$s</string>
+    <string name="card_actual">real %1$s</string>
+    <string name="card_file_length">archivos de %1$d min</string>
+    <string name="card_starts_after">Empieza tras %1$s</string>
+    <string name="context_free">Espacio libre</string>
+    <string name="status_skipped">%1$s salteadas</string>
+    <string name="status_failed">%1$s fallidas</string>
+    <plurals name="card_files">
+        <item quantity="one">%1$d archivo</item>
+        <item quantity="many">%1$d archivos</item>
+        <item quantity="other">%1$d archivos</item>
+    </plurals>
+
+    <!-- Settings screen -->
+    <string name="title_settings">Configuración</string>
+    <string name="settings_locked">La captura está en marcha. Podés ver esta configuración, pero no cambiarla.</string>
+    <string name="section_capture">Captura</string>
+    <string name="section_limits">Límites de la sesión</string>
+    <string name="section_storage">Almacenamiento</string>
+    <string name="section_appearance">Apariencia</string>
+    <string name="settings_mode_photo">Configuración del modo Foto. El modo se elige en la pantalla principal.</string>
+    <string name="settings_mode_video">Configuración del modo Video. El modo se elige en la pantalla principal.</string>
+    <string name="section_recording">Grabación</string>
+    <string name="section_start">Inicio</string>
+    <string name="label_delay">Inicio diferido</string>
+    <string name="label_video_quality">Calidad</string>
+    <string name="quality_high">Alta</string>
+    <string name="quality_medium">Media</string>
+    <string name="quality_low">Baja</string>
+    <string name="label_file_length">Duración de cada archivo</string>
+    <string name="file_length_minutes">%1$d min</string>
+    <string name="file_length_note">Cada archivo se cierra y se guarda antes de empezar el siguiente, así que es normal un corte breve entre archivos (en general menos de un segundo). Si Android cierra la app, solo se pierde el archivo que se estaba grabando.</string>
+    <string name="label_audio">Grabar audio</string>
+    <string name="audio_note">Usa el micrófono; Android pide el permiso al iniciar. Apagado: ningún acceso al micrófono.</string>
+    <string name="error_delay">De 1 segundo a 24 horas</string>
+    <string name="estimate_video">Aproximado: unos %1$s por hora (%2$s). El espacio libre alcanza para unas %3$s de grabación. El tamaño real depende de la escena.</string>
+    <string name="bitrate_mbps">%1$s Mbps</string>
+    <string name="label_interval">Intervalo entre fotos</string>
+    <string name="label_camera">Cámara</string>
+    <string name="camera_back">Trasera</string>
+    <string name="camera_front">Frontal</string>
+    <string name="label_resolution">Resolución</string>
+    <string name="resolution_largest">La mayor soportada (%1$s)</string>
+    <string name="resolution_none">No hay cámara disponible</string>
+    <string name="resolution_for_lens">Tamaños del lente trasero %1$s×, elegido en Vista previa.</string>
+    <string name="resolution_not_offered">Este lente no ofrece el tamaño guardado %1$s; se eligió el más grande.</string>
+    <string name="label_quality">Calidad JPEG</string>
+    <string name="label_limit_shots">Limitar la cantidad de fotos</string>
+    <string name="label_limit_duration">Limitar la duración</string>
+    <string name="hint_shots">Fotos</string>
+    <string name="hint_value">Valor</string>
+    <string name="label_min_free">Dejar este espacio libre (MB)</string>
+    <string name="label_theme">Tema</string>
+    <string name="theme_system">Sistema</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Oscuro</string>
+    <string name="unit_seconds">segundos</string>
+    <string name="unit_minutes">minutos</string>
+    <string name="unit_hours">horas</string>
+    <string name="unit_days">días</string>
+
+    <string name="estimate">Aproximado: unas %1$s fotos y %2$s por día. El espacio libre alcanza para unos %3$s de captura. El tamaño real de cada foto depende de la escena.</string>
+    <string name="estimate_unknown">La estimación necesita una configuración válida y una cámara disponible.</string>
+
+    <string name="error_interval">De 1 segundo a 24 horas</string>
+    <string name="error_shots">De 1 a 1.000.000</string>
+    <string name="error_duration">De 1 minuto a 30 días</string>
+    <string name="error_min_free">De 100 a 10240 MB</string>
+    <string name="error_not_saved">No se guardó. Corregí los campos marcados.</string>
+
+    <string name="permission_camera_needed">SentryCam necesita permiso de cámara para sacar fotos y grabar video.</string>
+    <string name="permission_camera_denied">Se negó el permiso de cámara. Activalo en la configuración de la app.</string>
+    <string name="action_open_settings">Abrir configuración de la app</string>
+
+    <!-- About -->
+    <string name="action_about">Acerca de</string>
+    <string name="about_title">Acerca de</string>
+    <string name="about_version">Versión %1$s</string>
+    <string name="about_section_app">App</string>
+    <string name="about_section_device">Dispositivo</string>
+    <string name="about_row_version">Versión</string>
+    <string name="about_row_build">Compilación</string>
+    <string name="about_row_android">Android</string>
+    <string name="about_row_device">Dispositivo</string>
+    <string name="about_build_debug">Depuración</string>
+    <string name="about_build_release">Publicación</string>
+    <string name="about_row_license">Licencia</string>
+    <string name="about_offline_note">Las fotos quedan en Pictures/SentryCam y los videos en Movies/SentryCam en este teléfono, y SentryCam nunca los borra. Sin acceso a internet, sin cuenta y sin rastreo.</string>
+    <string name="about_android_value">%1$s (API %2$d)</string>
+
+    <!-- Camera Preview -->
+    <!-- Back lenses -->
+    <string name="lens_chip_description">Lente %1$s×</string>
+    <string name="lens_digital_zoom">%1$s× es zoom digital en este teléfono; ya no se ofrece.</string>
+    <string name="action_preview">Vista previa</string>
+    <string name="title_preview">Vista de la cámara</string>
+    <string name="preview_busy">La cámara está en uso. Probá de nuevo en un momento.</string>
+    <string name="preview_error">No se pudo abrir la cámara.</string>
+    <string name="preview_no_camera">La cámara elegida no está disponible.</string>
+    <string name="preview_framing_approximate">Encuadre aproximado</string>
+</resources>
